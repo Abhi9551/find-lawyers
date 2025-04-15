@@ -49,6 +49,12 @@
   }
 }
 
+@layer utilities {
+  .border-border {
+    border-color: #e5e7eb; /* or any color you want */
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

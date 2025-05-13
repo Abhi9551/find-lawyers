@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import Image from "next/image"
 
 export default function Footer() {
   return (
@@ -10,7 +10,14 @@ export default function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-lg font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-              LegalConnect
+              <Image
+                          src="/logo.png" // Replace with your actual logo file name
+                          alt="Logo"
+                          width={74}
+                          height={74}
+                          className="rounded-full"
+                        />
+            Attorneys info
             </h3>
             <p className="mb-4 text-slate-300">
               Connecting clients with the right legal professionals for their specific needs.
@@ -120,12 +127,12 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-slate-800 pt-8 text-center text-sm text-slate-400">
           <div className="mb-4 flex flex-wrap justify-center gap-4">
-            <Link href="/terms" className="transition-colors hover:text-white hover:underline">
+            {/* <Link href="/terms" className="transition-colors hover:text-white hover:underline">
               Terms of Service
             </Link>
             <Link href="/privacy" className="transition-colors hover:text-white hover:underline">
               Privacy Policy
-            </Link>
+            </Link> */}
             {/* <Link href="/accessibility" className="transition-colors hover:text-white hover:underline">
               Accessibility
             </Link>
@@ -133,7 +140,7 @@ export default function Footer() {
               Sitemap
             </Link> */}
           </div>
-          <p>© {new Date().getFullYear()} LegalConnect. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Attorneys info. All rights reserved.</p>
         </div>
       </div>
     </footer>

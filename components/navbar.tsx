@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ChevronDown, Menu, Search, X } from "lucide-react"
+import Image from "next/image"
 
 const practiceAreas = [
   "Appeals",
@@ -92,9 +93,16 @@ export default function Navbar() {
         <div className="flex items-center">
           <Link
             href="/"
-            className="mr-6 bg-gradient-to-r from-slate-800 to-blue-600 bg-clip-text text-2xl font-bold text-transparent transition-all duration-300 hover:from-blue-600 hover:to-slate-800"
+            className="mr-6 bg-gradient-to-r from-slate-800 to-blue-600 bg-clip-text font-bold text-transparent transition-all duration-300 hover:from-blue-600 hover:to-slate-800"
           >
-            LegalConnect
+            <Image
+                        src="/logo.png"
+                        alt="Logo"
+                        width={74}
+                        height={74}
+                        className="rounded-full mt-1"
+                      />
+            {/* <span className="text-sm mb-10">Attorneys info</span> */}
           </Link>
 
           {/* Desktop Navigation */}

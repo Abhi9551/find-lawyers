@@ -1,13 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Scale } from "lucide-react"
+import Image from "next/image"
 
 export default function Preloader() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Initialize AOS after component mounts
     import("aos").then((AOS) => {
       AOS.default.init({
         duration: 800,
@@ -16,7 +15,6 @@ export default function Preloader() {
       })
     })
 
-    // Simulate loading time
     const timer = setTimeout(() => {
       setLoading(false)
     }, 2000)
@@ -25,7 +23,6 @@ export default function Preloader() {
   }, [])
 
   useEffect(() => {
-    // Disable scrolling when preloader is active
     if (loading) {
       document.body.style.overflow = "hidden"
     } else {
@@ -43,10 +40,16 @@ export default function Preloader() {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
       <div className="flex flex-col items-center">
         <div className="mb-4 animate-pulse">
-          <Scale className="h-16 w-16 text-blue-600" />
+          <Image
+            src="/logo.png" // Replace with your actual logo file name
+            alt="Logo"
+            width={120}
+            height={120}
+            className="rounded-full"
+          />
         </div>
-        <h1 className="mb-2 bg-gradient-to-r from-slate-800 to-blue-600 bg-clip-text text-3xl font-bold text-transparent">
-          LegalConnect
+        <h1 className="mb-2 bg-gradient-to-r from-slate-800 to-blue-600 bg-clip-text text-2xl font-bold text-transparent">
+          Attorneys info
         </h1>
         <div className="h-1 w-48 overflow-hidden rounded-full bg-gray-200">
           <div className="h-full w-full animate-progress bg-gradient-to-r from-blue-500 to-blue-700"></div>

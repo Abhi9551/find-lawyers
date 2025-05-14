@@ -11,7 +11,7 @@ export default function Footer() {
           <div>
             <h3 className="mb-4 text-lg font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
               <Image
-                          src="/logo.png" // Replace with your actual logo file name
+                          src="/logo.png"
                           alt="Logo"
                           width={74}
                           height={74}

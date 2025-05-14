@@ -5,11 +5,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card"
 import { StarIcon, Phone, MapPin } from "lucide-react"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import Preloader from "@/components/preloader"
 
 export default function Home() {
+  const router = useRouter()
+  const [practiceArea, setPracticeArea] = useState("")
+  const [location, setLocation] = useState("")
+
+  const handleFindLawyer = () => {
+    const searchParams = new URLSearchParams()
+
+    if (practiceArea) {
+      searchParams.append("practiceArea", practiceArea)
+    }
+
+    if (location) {
+      searchParams.append("location", location)
+    }
+
+    const queryString = searchParams.toString()
+    router.push(`/search${queryString ? `?${queryString}` : ""}`)
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Preloader />
@@ -26,7 +47,7 @@ export default function Home() {
             </p>
             <div className="mx-auto max-w-3xl rounded-lg bg-white/10 backdrop-blur-md p-6 shadow-lg">
               <div className="flex flex-col gap-4 md:flex-row">
-                <Select defaultValue="">
+                <Select value={practiceArea} onValueChange={setPracticeArea}>
                   <SelectTrigger className="w-full border-white/20 bg-white/10 text-white">
                     <SelectValue placeholder="Select Practice Area" />
                   </SelectTrigger>
@@ -39,7 +60,7 @@ export default function Home() {
                     <SelectItem value="family">Family Law</SelectItem>
                   </SelectContent>
                 </Select>
-                <Select defaultValue="">
+                <Select value={location} onValueChange={setLocation}>
                   <SelectTrigger className="w-full border-white/20 bg-white/10 text-white">
                     <SelectValue placeholder="Select Location" />
                   </SelectTrigger>
@@ -51,7 +72,10 @@ export default function Home() {
                     <SelectItem value="miami">Miami</SelectItem>
                   </SelectContent>
                 </Select>
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 md:w-auto">
+                <Button
+                  className="w-full bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 md:w-auto"
+                  onClick={handleFindLawyer}
+                >
                   Find a Lawyer
                 </Button>
               </div>
@@ -148,6 +172,7 @@ export default function Home() {
               <Button
                 variant="outline"
                 className="border-blue-200 bg-gradient-to-r from-blue-50 to-white hover:bg-blue-100"
+                onClick={() => router.push("/search")}
               >
                 View All Attorneys
               </Button>
@@ -261,6 +286,7 @@ export default function Home() {
                   className="overflow-hidden transition-all duration-300 hover:shadow-lg"
                   data-aos="fade-up"
                   data-aos-delay={index * 100}
+                  onClick={() => router.push(`/blog/${post.slug}`)}
                 >
                   <div className="relative h-48 w-full overflow-hidden">
                     <Image
@@ -277,12 +303,28 @@ export default function Home() {
                   <CardContent className="p-6">
                     <h3 className="mb-3 text-xl font-semibold">{post.title}</h3>
                     <p className="mb-4 text-muted-foreground">{post.excerpt}</p>
-                    <Button variant="link" className="p-0 text-blue-600 hover:text-blue-800">
+                    <Button
+                      variant="link"
+                      className="p-0 text-blue-600 hover:text-blue-800"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        router.push(`/blog/${post.slug}`)
+                      }}
+                    >
                       Read More
                     </Button>
                   </CardContent>
                 </Card>
               ))}
+            </div>
+            <div className="mt-6 text-center">
+              <Button
+                variant="outline"
+                className="border-blue-200 hover:bg-blue-50"
+                onClick={() => router.push("/blog")}
+              >
+                View All Articles
+              </Button>
             </div>
           </div>
         </section>
@@ -298,6 +340,7 @@ export default function Home() {
             <Button
               size="lg"
               className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+              onClick={() => router.push("/search")}
             >
               Find a Lawyer Now
             </Button>
@@ -360,18 +403,21 @@ const featuredAttorneys = [
 const blogPosts = [
   {
     title: "Understanding Child Custody Laws in 2023",
+    slug: "understanding-child-custody-laws-2023",
     excerpt: "Learn about the latest changes to child custody laws and how they might affect your case.",
     date: "June 15, 2023",
     image: "/placeholder.svg?height=300&width=500",
   },
   {
     title: "5 Things to Know Before Starting a Business",
+    slug: "5-things-to-know-before-starting-business",
     excerpt: "Essential legal considerations for entrepreneurs and small business owners.",
     date: "June 10, 2023",
     image: "/placeholder.svg?height=300&width=500",
   },
   {
     title: "What to Do After a Car Accident: Legal Steps",
+    slug: "what-to-do-after-car-accident-legal-steps",
     excerpt: "A step-by-step guide to protecting your rights and interests after a vehicle collision.",
     date: "June 5, 2023",
     image: "/placeholder.svg?height=300&width=500",

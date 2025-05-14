@@ -1,9 +1,12 @@
 "use client"
 
+import type React from "react"
+
 import { Input } from "@/components/ui/input"
 
 import { useState } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -86,6 +89,17 @@ const cities = [
 
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const router = useRouter()
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/search?keyword=${encodeURIComponent(searchQuery.trim())}`)
+      setSearchOpen(false)
+      setSearchQuery("")
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
@@ -268,12 +282,20 @@ export default function Navbar() {
                 <X className="h-5 w-5" />
               </Button>
             </div>
-            <div className="mt-4 flex flex-col gap-4 md:flex-row">
-              <Input placeholder="Lawyer name, practice area, or location" className="flex-1" />
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900">
+            <form onSubmit={handleSearch} className="mt-4 flex flex-col gap-4 md:flex-row">
+              <Input
+                placeholder="Lawyer name, practice area, or location"
+                className="flex-1"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Button
+                type="submit"
+                className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900"
+              >
                 Search
               </Button>
-            </div>
+            </form>
           </div>
         </div>
       )}

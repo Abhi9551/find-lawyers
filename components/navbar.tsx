@@ -284,7 +284,7 @@ export default function Navbar() {
             </div>
             <form onSubmit={handleSearch} className="mt-4 flex flex-col gap-4 md:flex-row">
               <Input
-                placeholder="Lawyer name, practice area, or location"
+                placeholder="Lawyer name"
                 className="flex-1"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}

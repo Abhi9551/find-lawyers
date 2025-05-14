@@ -295,15 +295,15 @@ export default function PracticeAreaPage({ params }: { params: { area: string } 
                   </Card>
                 ))}
               </div>
-              <div className="mt-6 text-center">
+              {/* <div className="mt-6 text-center">
                 <Button className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900">
                   View All {areaName} Lawyers
                 </Button>
-              </div>
+              </div> */}
             </div>
           )}
 
-          <div className="mt-8 text-center" data-aos="fade-up" data-aos-delay="500">
+          {/* <div className="mt-8 text-center" data-aos="fade-up" data-aos-delay="500">
             <h2 className="mb-4 text-2xl font-semibold">Ready to find a {areaName} lawyer?</h2>
             <Button
               size="lg"
@@ -311,7 +311,7 @@ export default function PracticeAreaPage({ params }: { params: { area: string } 
             >
               Get Started Now
             </Button>
-          </div>
+          </div> */}
         </div>
       </main>
       <Footer />
